@@ -24,3 +24,15 @@ sudo apt-get install -y kubectl
 kubectl get nodes
 ###to check all the kind cluster
 king get clusters
+
+###multi node cluster
+vi multicluster.yml
+###################
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+#####run this using kind
+kind create cluster --config multinode.yml
