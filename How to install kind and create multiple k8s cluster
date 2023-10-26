@@ -35,4 +35,4 @@ nodes:
 - role: worker
 - role: worker
 #####run this using kind
-kind create cluster --config multinode.yml
+kind create cluster --config multicluster.yml
