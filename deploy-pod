@@ -1,0 +1,8 @@
+   78  cd /root
+   79  git clone https://github.com/gopal1409/aspire-manifest.git
+   80  cd aspire-manifest/
+   81  ls
+   82  kubectl apply -f pod.yml
+   83  kubectl get pod
+   84  kubectl describe pod webserver
+   85  kubectl get pod
