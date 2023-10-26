@@ -22,3 +22,5 @@ sudo apt-get update
 sudo apt-get install -y kubectl
 ####check the k8s cluster
 kubectl get nodes
+###to check all the kind cluster
+king get clusters
