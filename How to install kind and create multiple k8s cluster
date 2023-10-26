@@ -41,4 +41,9 @@ kind create cluster --config multicluster.yml
  41  cd /root/.kube/
    42  ls
    43  cat config
-
+###how to switch once cluste to antoher using kubectl config context
+ 52  kubectl config get-contexts
+   53  kubectl config set-context kind-project-jpl
+   54  kubectl config get-contexts
+   55  kubectl get nodes
+kubectl config use-context nameofthecluster
