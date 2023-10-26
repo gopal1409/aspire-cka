@@ -36,3 +36,9 @@ nodes:
 - role: worker
 #####run this using kind
 kind create cluster --config multicluster.yml
+
+####how to verify the kubernetes cluster configuration
+ 41  cd /root/.kube/
+   42  ls
+   43  cat config
+
