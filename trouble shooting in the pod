@@ -1,0 +1,8 @@
+ 100  cd aspire-manifest/
+  101  git pull
+  102  kubectl apply -f pod1.yml
+  103  kubectl get pod
+  104  kubectl logs counter
+  105  kubectl logs -f counter
+  106  kubectl desribe pod counter
+  107  kubectl describe pod counter
