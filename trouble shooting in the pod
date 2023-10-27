@@ -1,4 +1,5 @@
- 100  cd aspire-manifest/
+git clone https://github.com/gopal1409/aspire-manifest.git
+100  cd aspire-manifest/
   101  git pull
   102  kubectl apply -f pod1.yml
 ###once you create the pod kubectl get pod will tell you the status of the pod 
