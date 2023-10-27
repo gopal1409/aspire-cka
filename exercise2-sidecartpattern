@@ -1,0 +1,164 @@
+Ambassador Container Design Hands On
+
+Estimated reading time: 7 Minutes
+When developing a cloud native application, we want it to serve a single purpose and be as simple as possible. For example, you would want to have a clear separation between your application logic and communications to remote services. This is where the ambassador container pattern comes in place.
+
+A single container accessing a service directly
+The Ambassador Container Pattern
+Since day one, the purpose of containers was to simplify applications (among other things). Each container should serve a single purpose and any task that can be separated to another container – should be.
+
+In Kubernetes, the Pod definition gives us an added possibility for abstraction. If two containers tasks are strongly coupled, or in case you can benefit from containers sharing resources (e.g., network namespace), then these should be under the same Pod.
+
+The name “ambassador” actually describes what it does very well. Also known as ambassador proxy, the ambassador pattern main purpose is to simplify access to other services. You may have also heard the term sidecar container, these share some similarities, but without diving into details – the ambassador container is a sidecar sub-type.
+
+A pod that's built of 2 containers: main and ambassador. The ambassador container contacts services on behalf of the main container
+A pod that’s built of 2 containers: main and ambassador. The ambassador container contacts services on behalf of the main container
+
+Localhost
+Since containers under the same pod share the same network namespace they can communicate with each other using localhost (the loopback interface). This is great, since now your main application container does not need to know where or how to access any other service besides the ambassador container.
+
+Any access to other service(s) and the logic required to do so are encapsulated within the ambassador container.
+
+So now the ambassador container will take care of connecting to other services – authentication, connection persistency, retries, handling unexpected replies and relevant configurations related to external services communications.
+
+As a developer, this is also great since as your application grows, this can help you to separate responsibilities between people or teams. A specific team can be dedicated to maintaining your service discovery container while the main application teams need not knowing how to access any other service(s).
+
+In order to show you how ambassador containers actually work – let’s take a look at a Kubernetes native application example.
+
+Kubectl Proxy
+Let’s assume that your main application needs to communicate with the Kubernetes API server directly. If you ever tried doing so, soon you find out that you need to take care of authentication, encryption and server verification. For this problem, kubectl proxy is a great solution.
+
+Kubectl proxy is an HTTP proxy access to the Kubernetes API. Your main application communicates with it via HTTP and it handles the HTTPS connection to the API server.
+
+So for this example, you will deploy kubectl proxy as an ambassador container. The main container will communicate with it by using HTTP on localhost and let it handle security transparently.
+
+The main container contacts the kubectl proxy via HTTP on localhost, and the kubectl proxy then communicates with the API server using HTTPS
+The main container contacts the kubectl proxy via HTTP on localhost, and the kubectl proxy then communicates with the API server using HTTPS
+
+Default Token Secret Volume
+Every pod in Kubernetes has a secret volume attached to it by default. This volume contains everything needed to securely talk to the Kubernetes API server from within a pod.
+
+Your kubectl proxy ambassador container will use this volume in order to communicate with the API server. You will see how in a minute.
+
+Kubectl Proxy Ambassador Container
+Disclaimer: the following example in its original form is part of the awesome book Kubernetes In Action, which I highly recommend!
+
+The Dockerfile below is the one that creates your kubectl proxy ambassador container image.
+
+All it does, as you can see, is downloading the v1.19 Kubernetes client tarball and extract it to the root folder.
+
+Other than that, it also adds as an entrypoint a script (kubectl-proxy.sh), which is explained below:
+
+FROM alpine
+
+RUN apk update && \
+	apk add curl && \
+	curl -L -O https://dl.k8s.io/v1.19.0/kubernetes-client-linux-amd64.tar.gz && \
+	tar zvxf kubernetes-client-linux-amd64.tar.gz kubernetes/client/bin/kubectl && \
+	mv kubernetes/client/bin/kubectl / && \
+	rm -rf kubernetes && \
+	rm -f kubernetes-client-linux-amd64.tar.gz
+
+ADD kubectl-proxy.sh /kubectl-proxy.sh
+
+ENTRYPOINT /kubectl-proxy.sh
+The entry point kubectl-proxy.sh script is detailed here:
+
+#!/bin/sh
+
+API_SERVER="https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT"
+CA_CRT="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+TOKEN="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
+
+/kubectl proxy --server="$API_SERVER" --certificate-authority="$CA_CRT" --token="$TOKEN" --accept-paths='^.*'
+Note that you can find instructions on how to build such command as part of the official documentation.
+
+As mentioned previously, you can see that this script assumes the existence of the default token secret volume. It passes these as arguments to the kubectl proxy command in order for it to authenticate in front of the API server.
+
+All that’s left for you to do is build this image and upload it to a container registry. In a folder that contains both the Dockerfile and the script, run the following commands:
+
+Note: I used my own public dockerhub account, you need to change the registry and repository to your own.
+
+$ docker build . -t omrizzy/ambassador:1.0
+...
+Successfully built 954821c22f41
+Successfully tagged omrizzy/ambassador:1.0
+
+$ docker push omrizzy/ambassador:1.0
+...
+1.0: digest: sha256:dad59..5aae81b84dad49dc7c4 size: 947
+The Pod Manifest
+Now that you have a kubectl proxy container, you need to create a manifest in order to apply it to your cluster.
+
+As a main application container, you’ll just use a container which contains the curl command. To keep the container running, its main process is set to sleep with a very long timer. You’ll use the curl binary in order to validate your setup. Of course, this container can be replaced with any other, this setup was used purely as an example.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: curl-with-ambassador
+spec:
+  containers:
+  - name: main
+    image: tutum/curl
+    command: ["sleep", "9999999"]
+  - name: ambassador
+    image: omrizzy/ambassador:1.0
+Save the above snippet to a file named ambassador.yaml. I will be applying it to my local cluster installed using kubeadm. Since creating a cluster is not part of this blog post, you can follow the instructions under the official documentation.
+
+$ kubectl apply -f ambassador.yaml
+pod/curl-with-ambassador created
+Validate that both of our containers are running under the pod:
+
+$ kubectl get pods
+NAME                   READY   STATUS    RESTARTS   AGE
+curl-with-ambassador   2/2     Running   0          9s
+Good job! now let’s see how we can use our setup and talk to the API server via the ambassador container.
+
+Talking To The API Server
+First, let’s exec into our main application container:
+
+$ kubectl exec -it curl-with-ambassador -c main -- bash
+Kubectl proxy default port is 8001, so let’s send a request to the API server and check it out:
+
+$ root@curl-with-ambassador:/# curl localhost:8001
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+    
+  },
+  "status": "Failure",
+  "message": "forbidden: User \"system:serviceaccount:default:default\" cannot get path \"/\"",
+  "reason": "Forbidden",
+  "details": {
+    
+  },
+  "code": 403
+}
+Well, this doesn’t look good. The source of this issue is that by default, Kubernetes has RBAC control enabled. This results in the service account not being authorized to access the API server.
+f you want to learn more about RBAC (Role-Based Access Control), you can do that via the official documentation. If you want me to write a blog post about RBAC, leave a comment in the comments section below or contact me.
+
+For now, we’re going to grant all service accounts cluster-admin privileges:
+
+$ kubectl create clusterrolebinding default-admin --clusterrole cluster-admin --serviceaccount=default:default
+Warning: this command is not safe for production clusters! for our simple introduction it’s perfectly fine.
+
+Now let’s try reaching the API server again:
+
+$ root@curl-with-ambassador:/# curl localhost:8001
+{
+  "paths": [
+    "/api",
+    "/api/v1",
+    "/apis",
+    "/apis/",
+    "/apis/admissionregistration.k8s.io",
+    "/apis/admissionregistration.k8s.io/v1",
+....
+}
+Great success! we can reach the API server via our kubectl proxy ambassador container.
+
+Let’s have a quick recap on the flow of communications:
+
+Using curl from our main container to send a simple HTTP GET request to the kubectl proxy via localhost.
+The kubectl proxy received the request and then relayed it with all relevant certificates and authentication needed to the API server with HTTPS.
