@@ -1,8 +1,13 @@
  100  cd aspire-manifest/
   101  git pull
   102  kubectl apply -f pod1.yml
+###once you create the pod kubectl get pod will tell you the status of the pod 
   103  kubectl get pod
+####if you pod is not coming up what we will do we need to find the reason behind the same
+###first we will check the logs 
   104  kubectl logs counter
+######next we can check the flotting logs 
   105  kubectl logs -f counter
-  106  kubectl desribe pod counter
+####finally we will use the kubectl describe command to get the pod detaisl
+  
   107  kubectl describe pod counter
