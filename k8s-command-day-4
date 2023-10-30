@@ -35,4 +35,9 @@ kubectl edit pod my-first-pod
 
 ###after making change Press Esc :wq!
 
+###delete the pod
+  62  kubectl get pod
+   63  kubectl delete pod my-first-pod
+   64  kubectl get pod
+
 
