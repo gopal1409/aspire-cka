@@ -7,3 +7,8 @@ crictl
 ###to join worker with master run this command in the master machine
 
  kubeadm token create --print-join-command --ttl 0
+
+###check the node status 
+ 13  kubectl get nodes
+   14  kubectl describe node ip-172-31-84-170
+
