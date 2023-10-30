@@ -17,5 +17,14 @@ crictl
    19  cd manifests/
    20  ls
    21  cat etcd.yaml
+###deploy our first pod in worker node
+ 47  kubectl run my-first-pod --image=nginx --port=80 --dry-run=client -o yaml > pod.yml
+   48  cat pod.yml
+   49  kubectl apply -f pod.yml
+   50  kubectl get pod
+   51  kubectl describe pod my-first-pod
+   52  kubectl get nodes
+   53  kubectl get pod -o wide
+
 
 
