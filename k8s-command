@@ -1,0 +1,6 @@
+    2  kubectl get nodes
+    3  kubectl get pod --all-namespaces
+####in place of docker we are using crictl as an command to check our containers
+    4  crictl ps
+    5  crictl images
+crictl
