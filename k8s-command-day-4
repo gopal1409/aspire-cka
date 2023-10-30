@@ -22,6 +22,11 @@ crictl
    48  cat pod.yml
    49  kubectl apply -f pod.yml
    50  kubectl get pod
+#### edit an running configuration 
+kubectl edit pod my-first-pod
+
+###after making change Press Esc :wq!
+
    51  kubectl describe pod my-first-pod
    52  kubectl get nodes
    53  kubectl get pod -o wide
