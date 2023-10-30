@@ -11,4 +11,11 @@ crictl
 ###check the node status 
  13  kubectl get nodes
    14  kubectl describe node ip-172-31-84-170
+####all the master node component configuration file are in this particular directory
+  17  cd /etc/kubernetes/
+   18  ls
+   19  cd manifests/
+   20  ls
+   21  cat etcd.yaml
+
 
