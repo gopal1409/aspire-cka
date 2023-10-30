@@ -30,6 +30,9 @@ kubectl edit pod my-first-pod
    51  kubectl describe pod my-first-pod
    52  kubectl get nodes
    53  kubectl get pod -o wide
+#### edit an running configuration 
+kubectl edit pod my-first-pod
 
+###after making change Press Esc :wq!
 
 
