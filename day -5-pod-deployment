@@ -5,3 +5,16 @@
    72  kubectl get pod
    73  kubectl get nodes -o wide
    75  kubectl get pod -o wide
+####by default all my custom workload will run on worker node
+###you need to run a pod in master node. 
+###there are two way to do the same 
+##first in the master node configuration directory we can put the pod defination. once we put the same it will automatically come up in master 
+ 69  kubectl run my-mster-pod --image=nginx --port=80 --dry-run=client -o yaml > masterpod.yaml
+  78  cat masterpod.yaml
+   79  cp masterpod.yaml /etc/kubernetes/manifests/
+   80  cd /etc/kubernetes/manifests/
+   81  ls
+   82  kubectl get pod
+   83  kubectl get nodes
+
+
