@@ -1,0 +1,7 @@
+###run my pod in worker node
+69  kubectl run my-first-pod --image=nginx --port=80 --dry-run=client -o yaml > pod1.yaml
+   70  cat pod1.yaml
+   71  kubectl apply -f pod1.yaml
+   72  kubectl get pod
+   73  kubectl get nodes -o wide
+   75  kubectl get pod -o wide
