@@ -7,3 +7,17 @@
    94  kubectl get deployment
    95  kubectl get rs
    96  kubectl get pod
+##three different way to update the deployment
+107  git pull
+  108  kubectl apply -f deploymen.yml
+  109  kubectl describe deploy myapp-deployment
+  110  kubectl rollout status deployment/myapp-deployment
+###you can updat the same using command line
+  111  kubectl set image deployment myapp-deployment myweb=nginx:1.14.2
+  112  kubectl describe deploy myapp-deployment
+  113  kubectl get deploy
+##you can update using run configuration
+  114  kubectl edit deploy myapp-deployment
+###search for image change the image nginx:1.16.1
+  115  kubectl describe deploy myapp-deployment
+
