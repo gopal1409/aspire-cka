@@ -20,4 +20,16 @@
   114  kubectl edit deploy myapp-deployment
 ###search for image change the image nginx:1.16.1
   115  kubectl describe deploy myapp-deployment
+####rollback 
+119  kubectl set image deployment myapp-deployment myweb=nginx:1.161
+  120  kubectl rollout status deployment myapp-deployment
+  121  kubectl get rs
+  122  kubectl get pod
+  123  kubectl rollout history deployment myapp-deployment
+  124  kubectl rollout history deployment myapp-deployment --revision=5
+  125  kubectl rollout history deployment myapp-deployment --revision=4
+  126  kubectl rollout undo  deployment myapp-deployment
+  127  kubectl rollout undo  deployment myapp-deployment --to-revision=3
+  128  kubectl describe deploy
+
 
