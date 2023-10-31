@@ -31,5 +31,10 @@
   126  kubectl rollout undo  deployment myapp-deployment
   127  kubectl rollout undo  deployment myapp-deployment --to-revision=3
   128  kubectl describe deploy
-
-
+##autoscaling in the pod
+ 133  kubectl get deploy
+  134  kubectl scale deploy myapp-deployment --replicas=4
+  135  kubectl get deploy
+  136  kubectl autoscale deploy myapp-deployment --min=5 --max=10 --cpu-percent=80
+  137  kubectl get deploy
+  138  kubectl get hpa
