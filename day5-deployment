@@ -1,0 +1,9 @@
+###clone the repo
+  git clone https://github.com/gopal1409/aspire-manifest.git
+##lets deploy it
+   91  cd aspire-manifest/
+   92  ls
+   93  kubectl apply -f deploymen.yml
+   94  kubectl get deployment
+   95  kubectl get rs
+   96  kubectl get pod
