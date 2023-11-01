@@ -11,4 +11,11 @@
   176  kubectl get svc
 ###tinkerbell eksanywhere
 https://www.youtube.com/watch?v=RmZZ7Gr8kMw&t=1749s
-
+####exercise
+create a new deployment with docker image(piuma/phpsysinfo)
+expose it using node port. 
+kubectl get deploy nameofthedeployment
+kubectl get pod -o wide
+####then access the application using node port
+first time when you access the application it will show you you are in which pod. 
+the ip address of your pod will be visiable in the browser. 
