@@ -6,3 +6,7 @@
   151  kubectl describe svc myapp-service
 ###match it with your pod ip verify the endpoint ip 
   kubectl get pod -o wide
+####nodeport
+ 175  kubectl expose deploy myapp-deployment --port=80 --type=NodePort --name=myapp-service-node
+  176  kubectl get svc
+
