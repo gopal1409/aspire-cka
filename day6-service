@@ -1,0 +1,8 @@
+###how to create a service for your pod and verify the same
+  144  kubectl get deploy
+  ##create the service
+    149  kubectl expose deploy myapp-deployment --port=80 --type=ClusterIP --name=myapp-service
+  150  kubectl get svc
+  151  kubectl describe svc myapp-service
+###match it with your pod ip verify the endpoint ip 
+  kubectl get pod -o wide
