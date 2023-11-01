@@ -9,4 +9,6 @@
 ####nodeport
  175  kubectl expose deploy myapp-deployment --port=80 --type=NodePort --name=myapp-service-node
   176  kubectl get svc
+###tinkerbell eksanywhere
+https://www.youtube.com/watch?v=RmZZ7Gr8kMw&t=1749s
 
