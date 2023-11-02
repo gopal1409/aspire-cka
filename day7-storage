@@ -20,5 +20,11 @@
   201  kubectl apply -f secret.yml
   202  kubectl get secret
   203  kubectl describe secret mysql-db-passowrd
+###lets deploy configmap
+ 206  git pull
+  207  kubectl apply -f configmap.yml
+  208  kubectl get configmap
+  209  kubectl describe configmap usermanagement-db-creation-script
+
 
 
