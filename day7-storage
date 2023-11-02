@@ -1,0 +1,4 @@
+###we will login to the second vm
+  sudo -i
+  mkdir /mnt/data
+  ls /mnt/data
