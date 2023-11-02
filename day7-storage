@@ -2,3 +2,12 @@
   sudo -i
   mkdir /mnt/data
   ls /mnt/data
+
+###once we create the directory we will get back to the master machine and create the persistent volume
+###below mentioned activity need to be done in master machine only
+ 180  cd aspire-manifest/
+  181  git pull
+  182  kubectl apply -f pv.yml
+  183  kubectl get pv
+  184  kubectl describe pv task-pv-volume
+
