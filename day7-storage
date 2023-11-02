@@ -10,4 +10,10 @@
   182  kubectl apply -f pv.yml
   183  kubectl get pv
   184  kubectl describe pv task-pv-volume
+###lets create the pvc and map the same with pv
+ 193  git pull
+  194  kubectl apply -f pvc.yml
+  195  kubectl get pv
+  196  kubectl get pvc
+
 
