@@ -1,0 +1,13 @@
+What is namespace in k8s
+https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+Quota in NS
+https://kubernetes.io/docs/concepts/policy/resource-quotas/#:~:text=A%20resource%20quota%2C%20defined%20by,by%20resources%20in%20that%20namespace.
+What is OSI layer and layer 7
+  what is layer 7 application layer. using application layer what we can do
+What is ingress in k8s
+https://kubernetes.io/docs/concepts/services-networking/ingress/
+
+Service account in k8s
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+RBAC in K8s
+https://kubernetes.io/docs/reference/access-authn-authz/rbac/
