@@ -1,0 +1,17 @@
+###this is the plugin which will install dashboard. 
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+#####once we install dashboard we need to create a sa and RBAC to access the dashboard
+   286  git pull
+  287  kubectl apply -f sa.yml
+  288  kubectl apply -f rbac.yml
+  
+  290  kubectl get sa -A
+  291  kubectl get svc -A
+  292  kubectl edit svc kubernetes-dashboard --namespace kubernetes-dashboard
+  ##it will open the file in vi editor
+  ##press Esc i
+  #from the last go to third line change the ClusterIP to NodePort
+  ###after that save the file
+  ##open the browser copy the second machine url and the port number put httpd in front of it. 
+  293  kubectl get svc -A
+  294  kubectl -n kubernetes-dashboard create token admin-user
