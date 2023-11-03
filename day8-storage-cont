@@ -1,0 +1,52 @@
+###we will login to the second vm
+  sudo -i
+  mkdir /mnt/data
+  ls /mnt/data
+
+###once we create the directory we will get back to the master machine and create the persistent volume
+###below mentioned activity need to be done in master machine only
+ 180  cd aspire-manifest/
+  181  git pull
+  182  kubectl apply -f pv.yml
+  183  kubectl get pv
+  184  kubectl describe pv task-pv-volume
+###lets create the pvc and map the same with pv
+ 193  git pull
+  194  kubectl apply -f pvc.yml
+  195  kubectl get pv
+  196  kubectl get pvc
+##lets add the secret
+  200  git pull
+  201  kubectl apply -f secret.yml
+  202  kubectl get secret
+  203  kubectl describe secret mysql-db-passowrd
+###lets deploy configmap
+ 206  git pull
+  207  kubectl apply -f configmap.yml
+  208  kubectl get configmap
+  209  kubectl describe configmap usermanagement-db-creation-script
+  #####we will create the mysql database and verify pvc configmap and secret
+
+  cd aspire-manifest
+   227  git pull
+  kubectl apply -f configmap.yml
+  228  kubectl apply -f mysql-deploy.yml
+  229  kubectl get deploy
+   232  kubectl get pod
+  ###lets login inside the pod and verify the password is working or not (dbpassword11)
+  ###change the pod id to your pod id
+  235  kubectl exec -it mysql-deployment-765cb5ff78-fv577 -- /bin/bash
+  mysql -u root -p 
+  ###once you login to the pod we need to verify the configmap that the database is created or not. 
+  show databases;
+  ##this will show you the webappdb. 
+  ###login to the second machine 
+  sudo -i
+ # go to 
+  cd /mnt/data
+  ls
+  #####from the mysql prompt if i manually create a data the efect will be visiable in my storage or not. 
+  create database test;
+  exit
+  exit
+
