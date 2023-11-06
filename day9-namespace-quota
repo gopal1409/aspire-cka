@@ -1,1 +1,5 @@
+###we will create a namespace
+ 3  kubectl get namespaces
+    4  kubectl create ns dev
+    5  kubectl describe ns dev
 
