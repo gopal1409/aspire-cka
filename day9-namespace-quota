@@ -9,4 +9,13 @@
    13  kubectl get resourcequota
    14  kubectl get resourcequota -n dev
    15  kubectl describe resourcequota -n dev
+###lets over utilzied it
+   24  git pull
+   25  kubectl apply -f podq.yml
+   26  kubectl get pod -n dev
+   27  kubectl describe ns dev
+   28  git pull
+   29  kubectl apply -f podq.yml
+   30  kubectl apply -f podover.yml
+
 
