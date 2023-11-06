@@ -2,4 +2,11 @@
  3  kubectl get namespaces
     4  kubectl create ns dev
     5  kubectl describe ns dev
+###add the resourcequota
+  9  cd aspire-manifest/
+   11  git pull
+   12  kubectl apply -f quota.yml
+   13  kubectl get resourcequota
+   14  kubectl get resourcequota -n dev
+   15  kubectl describe resourcequota -n dev
 
