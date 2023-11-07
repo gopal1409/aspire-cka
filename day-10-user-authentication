@@ -45,4 +45,14 @@ kim-nameoftheuser
   192  kubectl config use-context kim-kubernetes
   193  kubectl config get-contexts
   194  kubectl config use-context kubernetes-admin@kubernetes
+###create a role and apply it
+203  cd /root/
+  204  ls
+  205  cd aspire-manifest/
+  206  git pull
+  207  kubectl apply -f read-only-role.yml
+  ##lets verify it
+  213  kubectl config use-context kim-kubernetes
+  215  kubectl get pod --namespace=instavote
+
 
