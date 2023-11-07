@@ -14,4 +14,34 @@
  # 1. CN: this will be set as username
   #2. 0: orgination or group by k8s
   181  openssl req -new -key kim.key -out kim.csr -subj "/CN=kim/O=dev/O=example.org"
+##we need to access the following file on k8s master 
+1. Certificate: ca.crt
+2. Pricate Key: ca.key
+###by default stored in 
+/etc/kubernetes/pki
+######eks or aks cluster. you will not have access to the master cluster and the path but you can request aws they will provide you with ca.crt and ca.key file. 
+##you can download the same in the same folder where the user CSR certificate is there. 
+#once you get ca.crt and ca.key we need to sign the CSR
+ openssl x509 -req -CA  /etc/kubernetes/pki/ca.crt -CAkey  /etc/kubernetes/pki/ca.key -CAcreateserial -days 500 -in kim.csr -out kim.crt
+####now the time come when you are going setup user config with kubectl. 
+##to create the user we need to follow the steps
+1. add credentials in the configuration
+2. set context to login as a user to the cluster
+switch context
+###to add credentials
+--client-certificate=/root/.kube/users/kim.crt : you need to provide absolute path to the user certificate
+=/root/.kube/users/kim.key=this will be the absolute path to the key
+
+ kubectl config set-context kim-kubernetes --cluster=kubernetes --user=kim --namespace=instavote
+
+kim-kubernetes=this is the name of the context
+kubernetes=nameofthecluster
+kim-nameoftheuser
+--namespace: we are giving access to this particular namespace
+###to switch to an context
+ 190  kubectl config get-contexts
+  191  kubectl config set-context kim-kubernetes --cluster=kubernetes --user=kim --namespace=instavote
+  192  kubectl config use-context kim-kubernetes
+  193  kubectl config get-contexts
+  194  kubectl config use-context kubernetes-admin
 
