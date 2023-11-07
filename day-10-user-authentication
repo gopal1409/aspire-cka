@@ -57,4 +57,6 @@ kim-nameoftheuser
 ##finally switch back to the admin user
 kubectl config use-context kubernetes-admin@kubernetes
 
-
+###common error in path
+error: unable to read client-key /root/.kube/users/=/root/.kube/users/kim.key for kim due to open /root/.kube/users/=/root/.kube/users/kim.key: no such file or directory
+ kubectl config set-credentials kim --client-certificate=/root/.kube/users/kim.crt --client-key=/root/.kube/users/kim.key
