@@ -60,3 +60,7 @@ kubectl config use-context kubernetes-admin@kubernetes
 ###common error in path
 error: unable to read client-key /root/.kube/users/=/root/.kube/users/kim.key for kim due to open /root/.kube/users/=/root/.kube/users/kim.key: no such file or directory
  kubectl config set-credentials kim --client-certificate=/root/.kube/users/kim.crt --client-key=/root/.kube/users/kim.key
+###finally bind the role
+225  cd /root/aspire-manifest/
+  226  git pull
+  227  kubectl apply -f read-only-bind.yml
