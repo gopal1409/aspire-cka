@@ -44,5 +44,5 @@ kim-nameoftheuser
   191  kubectl config set-context kim-kubernetes --cluster=kubernetes --user=kim --namespace=instavote
   192  kubectl config use-context kim-kubernetes
   193  kubectl config get-contexts
-  194  kubectl config use-context kubernetes-admin
+  194  kubectl config use-context kubernetes-admin@kubernetes
 
