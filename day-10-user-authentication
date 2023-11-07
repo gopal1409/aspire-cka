@@ -54,5 +54,7 @@ kim-nameoftheuser
   ##lets verify it
   213  kubectl config use-context kim-kubernetes
   215  kubectl get pod --namespace=instavote
+##finally switch back to the admin user
+kubectl config use-context kubernetes-admin@kubernetes
 
 
