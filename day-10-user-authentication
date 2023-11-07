@@ -29,6 +29,7 @@
 2. set context to login as a user to the cluster
 switch context
 ###to add credentials
+  189  kubectl config set-credentials kim --client-certificate=/root/.kube/users/kim.crt --client-key==/root/.kube/users/kim.key
 --client-certificate=/root/.kube/users/kim.crt : you need to provide absolute path to the user certificate
 =/root/.kube/users/kim.key=this will be the absolute path to the key
 
