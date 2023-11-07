@@ -1,0 +1,17 @@
+###lets create a namespace
+   kubectl create namespace instavote
+#####inside the namespace we will create a pod and verify the pod is running or not
+  166  kubectl run vote --image=nginx --port=80 --namespace=instavote
+    169  kubectl get pod vote -n instavote
+
+#####next we will generate the user private key
+   172  mkdir -p ~/.kube/users
+  173  cd  ~/.kube/users
+  174  openssl genrsa -out kim.key 2048
+  175  ls
+  176  openssl genrsa -out kim.key 2048
+###next we will generate the certificate signing for this user. when  you generate the CSR make sure you also provide 
+ # 1. CN: this will be set as username
+  #2. 0: orgination or group by k8s
+  181  openssl req -new -key kim.key -out kim.csr -subj "/CN=kim/O=dev/O=example.org"
+
