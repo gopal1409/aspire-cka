@@ -20,3 +20,9 @@ these should allow the new sa to create secrets and configmap in the namespace. 
   349  kubectl get rolebinding
   350  kubectl get rolebinding -n project-hamster
 
+###verify the RBAC setup we can use k8s auth can-i
+360  kubectl -n project-hamster auth can-i create secret --as system:serviceaccount:project-hamster:jane
+  361  kubectl -n project-hamster auth can-i create configmap --as system:serviceaccount:project-hamster:jane
+  362  kubectl -n project-hamster auth can-i create pod --as system:serviceaccount:project-hamster:jane
+  363  kubectl -n project-hamster auth can-i create deployment --as system:serviceaccount:project-hamster:jane
+
