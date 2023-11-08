@@ -1,4 +1,11 @@
-create a new service account jenkins inside a namespace project-hamster. create a role and rolebinding. both the role and rolebinding will have a name called as processor. 
+create a new service account jane-cicd user inside a namespace project-hamster. create a role and rolebinding. both the role and rolebinding will have a name called as processor. 
 these should allow the new sa to create secrets and configmap in the namespace. plus they will say that the sa account need to verify they have access or not. 
 
-1. 
+1. lets create the namespace project-hamster
+ 325  kubectl create ns project-hamster
+  326  kubectl get ns
+##3lets create the service account jane
+ 330  kubectl -n project-hamster create sa jane --dry-run=client -o yaml
+  331  kubectl -n project-hamster create sa jane
+  332  kubectl -n project-hamster get sa
+
