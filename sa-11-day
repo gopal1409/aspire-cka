@@ -1,1 +1,4 @@
+create a new service account jenkins inside a namespace project-hamster. create a role and rolebinding. both the role and rolebinding will have a name called as processor. 
+these should allow the new sa to create secrets and configmap in the namespace. plus they will say that the sa account need to verify they have access or not. 
 
+1. 
