@@ -8,4 +8,5 @@ these should allow the new sa to create secrets and configmap in the namespace. 
  330  kubectl -n project-hamster create sa jane --dry-run=client -o yaml
   331  kubectl -n project-hamster create sa jane
   332  kubectl -n project-hamster get sa
+####we will create a role
 
