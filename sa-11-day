@@ -9,4 +9,14 @@ these should allow the new sa to create secrets and configmap in the namespace. 
   331  kubectl -n project-hamster create sa jane
   332  kubectl -n project-hamster get sa
 ####we will create a role
+ 335  kubectl -n project-hamster create role -h
+  336  kubectl -n project-hamester create role processor --verb=create --resource=secrets --resource=configmap --dry-run -o yaml
+  338  kubectl get ns
+  339  kubectl -n project-hamster create role processor --verb=create --resource=secrets --resource=configmap
+  340  kubectl get role -n  project-hamster
+###bind the role service account. 
+347  kubectl -n project-hamster create rolebinding processor --role processor --serviceaccount project-hamster:jane --dry-run=client -o yaml
+  348  kubectl -n project-hamster create rolebinding processor --role processor --serviceaccount project-hamster:jane
+  349  kubectl get rolebinding
+  350  kubectl get rolebinding -n project-hamster
 
