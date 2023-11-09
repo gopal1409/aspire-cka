@@ -30,5 +30,11 @@ rm -rf .git
   559  helm repo update gitlab
   560  helm search repo -l gitlab/gitlab-runner
 #####we need to conigure the same for kubernetes
+##copy the values.yml
+https://github.com/gopal1409/gitlab-value.yml/blob/main/values.yml
 
+####create file
+values.yml
+##########
+inside that file find runnerRegistrationToken
 
