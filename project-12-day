@@ -37,4 +37,8 @@ https://github.com/gopal1409/gitlab-value.yml/blob/main/values.yml
 values.yml
 ##########
 inside that file find runnerRegistrationToken
+###finally we will install the runner with values.yml file
+helm install --namespace default gitlab-runner -f values.yml gitlab/gitlab-runner
+kubectl get pod
+ kubectl logs gitlab-runner-7c557bb44d-6hbxq
 
