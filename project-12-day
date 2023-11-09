@@ -5,7 +5,8 @@ lets create login id in gitlab and dockerhub.
   536  cd spring-chat-app-aspire/
   537  git config --global user.name "gopal"
   538  git config --global user.email "gopal1409@gmail.com"
-  539  git init
+rm -rf .git  
+539  git init
   540  git add .
   541  git commit -m "springapp"
   542  git log
