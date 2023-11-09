@@ -13,3 +13,9 @@ rm -rf .git
   543  ssh-keygen -t rsa
   544  cat /root/.ssh/id_rsa.pub
   ###once you got the keypair
+####create a new repo and upload the code inside the repo
+###add the remote repo you got it from gitlab
+  553  git remote add origin git@gitlab.com:gopal1409/spring-chat-app-aspire.git
+###then push your code 
+  554  git push origin master
+
