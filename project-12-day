@@ -1,0 +1,14 @@
+lets create login id in gitlab and dockerhub. 
+##lets upload the code in gitlab. 
+ 534  cd /root
+  535  git clone https://github.com/gopal1409/spring-chat-app-aspire.git
+  536  cd spring-chat-app-aspire/
+  537  git config --global user.name "gopal"
+  538  git config --global user.email "gopal1409@gmail.com"
+  539  git init
+  540  git add .
+  541  git commit -m "springapp"
+  542  git log
+  543  ssh-keygen -t rsa
+  544  cat /root/.ssh/id_rsa.pub
+  ###once you got the keypair
