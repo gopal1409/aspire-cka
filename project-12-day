@@ -41,4 +41,5 @@ inside that file find runnerRegistrationToken
 helm install --namespace default gitlab-runner -f values.yml gitlab/gitlab-runner
 kubectl get pod
  kubectl logs gitlab-runner-7c557bb44d-6hbxq
+kubectl get sa -A
 
