@@ -18,6 +18,13 @@ rm -rf .git
   553  git remote add origin git@gitlab.com:gopal1409/spring-chat-app-aspire.git
 ###then push your code 
   554  git push origin master
+###how to install helm
+ 261  wget https://get.helm.sh/helm-v3.13.1-linux-amd64.tar.gz
+  262  tar zxvf helm-v3.13.1-linux-amd64.tar.gz
+  263  cd linux-amd64/
+  264  ls
+  265  cp helm /usr/bin
+
 ####using helm install gitlab runner
  558  helm repo add gitlab https://charts.gitlab.io
   559  helm repo update gitlab
