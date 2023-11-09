@@ -18,4 +18,10 @@ rm -rf .git
   553  git remote add origin git@gitlab.com:gopal1409/spring-chat-app-aspire.git
 ###then push your code 
   554  git push origin master
+####using helm install gitlab runner
+ 558  helm repo add gitlab https://charts.gitlab.io
+  559  helm repo update gitlab
+  560  helm search repo -l gitlab/gitlab-runner
+#####we need to conigure the same for kubernetes
+
 
