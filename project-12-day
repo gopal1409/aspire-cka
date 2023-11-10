@@ -42,4 +42,10 @@ helm install --namespace default gitlab-runner -f values.yml gitlab/gitlab-runne
 kubectl get pod
  kubectl logs gitlab-runner-7c557bb44d-6hbxq
 kubectl get sa -A
+###in gitlab add the varaibles
+CI_REGISTRY = docker.io
+CI_REGISTRY_IMAGE= index.docker.io/gopal1409/chatapp
+CI_REGISTRY_PASSWORD = gopal1409
+CI_REGISTRY_USER = pass
+
 
