@@ -6,3 +6,7 @@ config.yaml
 ####check two pods of agent is running or not
  618  kubectl get pod -A
  kubectl logs -f k8s-aspire-gitlab-agent-v1-79c7fd8dc-64hwj --namespace=gitlab-agent-k8s-aspire
+
+###we will create a new project with a yaml file
+https://github.com/gopal1409/aspire-manifest/blob/master/deploymen.yml
+####copy paste all the content as it is and save it. 
