@@ -3,3 +3,6 @@ then create an agent folder
 .gitlab/agents/k8s-aspire/
 ####inside the folder create a file 
 config.yaml
+####check two pods of agent is running or not
+ 618  kubectl get pod -A
+ kubectl logs -f k8s-aspire-gitlab-agent-v1-79c7fd8dc-64hwj --namespace=gitlab-agent-k8s-aspire
