@@ -1,0 +1,3 @@
+##3create a new project withought using intial readmefile. 
+##inside the project we need to create a folder
+.gitlab/agents/k8s-aspire/config.yaml
