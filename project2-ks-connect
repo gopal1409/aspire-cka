@@ -10,3 +10,9 @@ config.yaml
 ###we will create a new project with a yaml file
 https://github.com/gopal1409/aspire-manifest/blob/master/deploymen.yml
 ####copy paste all the content as it is and save it. 
+####then go back to the k8s agent
+###open the config.yaml file
+gitops:
+  manifest_projects:
+  - id: "gopal1409/aspire-manifest"
+
