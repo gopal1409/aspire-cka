@@ -1,0 +1,3 @@
+###creat a new project in gitlab
+then create an agent folder
+.gitlab/agents/k8s-aspire/
