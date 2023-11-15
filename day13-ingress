@@ -10,3 +10,5 @@
 
  643  kubectl expose pod pod1 --port 80 --name service1
   644  kubectl expose pod pod2 --port 80 --name service2
+###verify the same bothe the service is being exposed internally to your k8s cluster using cluster ip
+kubectl get svc -A
