@@ -6,6 +6,10 @@
   630  kubectl get svc -A
 ####delete the validation web hook as we dont have the ssl certificate we have it but unsigned
        665  kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+###3lets deploy two pod one is nginx one is httpd
+ 637  kubectl run pod1 --image=nginx
+  638  kubectl run pod2 --image=httpd
+
 ##3lets expose the app internal to your k8s cluster
 
  643  kubectl expose pod pod1 --port 80 --name service1
