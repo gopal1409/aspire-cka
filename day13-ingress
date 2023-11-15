@@ -21,4 +21,39 @@ kubectl get svc -A
   663  kubectl get svc
   664  kubectl describe svc service1
   665  kubectl describe svc service2
+###lets create the ingress manifest
+###vi ingress.yml ###inside this copy from line 26 till 51
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /service1
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+      - path: /service2
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 80
+#####save the file and apply it
+ 674  kubectl apply -f ingress.yml
+####below command will verify the ingress
+  675  kubectl get ingress
+###describe ingress will show you that it is mapped to both of your pod service
+  676  kubectl describe ingress minimal-ingress
+  677  kubectl get pod -o wide
+
 
