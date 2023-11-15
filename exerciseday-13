@@ -3,3 +3,29 @@ Create a new nginx Ingress resource as follows:
 ✑ Name: pong
 ✑ Namespace: ing-internal
 ✑ Exposing service hello on path /hello using service port 5678
+###they will never tell you to install ingress controller
+##you need to verfiy that there is servive. 
+kubectl get svc hello --namespace=ing-internal
+##3once you see this service. 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pong
+  namespace: ing-internal
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: hello
+            port:
+              number: 5678
+
+
+
