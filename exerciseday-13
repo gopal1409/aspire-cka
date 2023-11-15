@@ -1,5 +1,8 @@
 Task -
 Create a new nginx Ingress resource as follows:
+##first create a pod with nginx image name of the pod will be pong and namespace will be ing-internal
+##second create a service called as hello in the namespace ing-internal
+###to do the exercise using the command line. 
 ✑ Name: pong
 ✑ Namespace: ing-internal
 ✑ Exposing service hello on path /hello using service port 5678
