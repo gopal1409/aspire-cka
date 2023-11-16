@@ -34,4 +34,11 @@ if you want to reapply it you need to delete the job and recreate it.
   888  kubectl apply -f jobs.yml
   889  watch kubectl get pod
 to comout after the third pod press control c
+###job timing for 70 hours
+  893  kubectl delete job node-app-job
+  895  kubectl get job
+  896  git pull
+  897  kubectl apply -f jobs.yml
+  898  watch kubectl get pod
+
 
