@@ -28,5 +28,10 @@ if you want to reapply it you need to delete the job and recreate it.
   881  kubectl get pod
   882  watch kubectl get pod
   883  kubectl delete job node-app-job
-#######retying job
+#######retying job using activedeadline
+ 886  git pull
+  887  kubectl delete job node-app-job
+  888  kubectl apply -f jobs.yml
+  889  watch kubectl get pod
+to comout after the third pod press control c
 
