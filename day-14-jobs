@@ -4,3 +4,14 @@
   852  kubectl get jobs
   853  kubectl get pod
   854  kubectl logs node-app-job-xw82g
+####unlike deployment and service in kjubernetes you cant change the same job configuration file and reapply it once again. 
+if you want to reapply it you need to delete the job and recreate it. 
+ 859  git pull
+  860  kubectl apply -f jobs.yml
+  ####delete a job and reapply
+ 862  kubectl get job
+  863  kubectl delete job node-app-job
+  864  kubectl get pod
+  865  kubectl apply -f jobs.yml
+  866  kubectl get pod
+
