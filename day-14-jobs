@@ -1,0 +1,6 @@
+  849  cd aspire-manifest/
+  850  git pull
+  851  kubectl apply -f jobs.yml
+  852  kubectl get jobs
+  853  kubectl get pod
+  854  kubectl logs node-app-job-xw82g
