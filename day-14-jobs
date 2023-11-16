@@ -14,4 +14,10 @@ if you want to reapply it you need to delete the job and recreate it.
   864  kubectl get pod
   865  kubectl apply -f jobs.yml
   866  kubectl get pod
+###completion and parrelisim
+ 870  kubectl delete jobs node-app-job
+  871  git pull
+  872  kubectl apply -f jobs.yml
+  873  kubectl get job
+  874  kubectl get pod
 
