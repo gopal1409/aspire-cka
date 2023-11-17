@@ -33,4 +33,21 @@ spec:
 kubectl apply -f pv-state.yml
  969  kubectl get pv
   970  kubectl describe pv state-pv-volume
-
+####lets create pvc
+vi state-pvc.yml
+###add the below content inside the file
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: state-pv-claim
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+####after saving it 
+kubectl apply -f state-pvc.yml
+kubectl get pvc
