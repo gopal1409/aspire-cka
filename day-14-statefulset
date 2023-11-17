@@ -135,5 +135,5 @@ exit
 kubectl delete pod -l app=nginx
 kubectl get pod -w -l app=nginx
 ###verify the pod creationg on scaling
-kubectl scale statefulset --replicase=5 web
+kubectl scale statefulset --replicas=5 web
 kubectl get pod -w -l app-nginx
