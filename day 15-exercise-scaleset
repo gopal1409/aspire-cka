@@ -1,0 +1,37 @@
+###create a postgress deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pg
+  template:
+    metadata:
+      labels:
+        app: pg
+    spec:
+      containers:
+        - name: postgresql
+          image: postgres:14
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+##test the deployment
+  kubectl exec pg-79d96fb7b7-zg9kl -- psql -U postgres -c "CREATE TABLE users (id SERIAL, name VARCHAR);"
+
+
+kubectl exec pg-79d96fb7b7-zg9kl -- psql -U postgres -c "SELECT * FROM users;"
+
+
+
+kubectl rollout restart deploy/pg deployment.apps/pg restarted
+
+
+
+
+kubectl exec pg-8486b4f555-5dqz8 -- psql -U postgres -c "SELECT * FROM users;"
