@@ -51,3 +51,25 @@ spec:
 ####after saving it 
 kubectl apply -f state-pvc.yml
 kubectl get pvc
+###first we will taint the master node
+998  kubectl taint node ip-172-31-85-2 node-role.kubernetes.io/master:NoSchedule
+###delete pv and pvc
+kubectl delete pvc state-pv-claim
+kubectl delete pv state-pv-volume
+kubectl get nodes
+####change the hostname to the worker node
+vi pv-state.yml
+######change the name to the worker node
+ nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In 
+              values:
+              - ip-172-31-85-2 ###put the workernode hostname
+####then again apply 
+kubectl apply -f pv-state.yml
+kubectl apply -f state-pvc.yml
+######then login to the second machine
+sudo -i
+####create the same directory
+mkdir /pvder
