@@ -69,7 +69,7 @@ vi pv-state.yml
 ####then again apply 
 kubectl apply -f pv-state.yml
 kubectl apply -f state-pvc.yml
-######then login to the second machine
+######then login to the workernode machine
 sudo -i
 ####create the same directory
 mkdir /pvder
