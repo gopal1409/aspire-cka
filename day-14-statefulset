@@ -30,6 +30,7 @@ spec:
       ###to get the hostname 
                 kubectl get nodes
 ###verify the pv has been created or not
+kubectl apply -f pv-state.yml
  969  kubectl get pv
   970  kubectl describe pv state-pv-volume
 
