@@ -122,3 +122,4 @@ spec:
 kubectl apply -f statefullapp.yml
  1036  kubectl get statefulset
  1037  kubectl get pod
+kubectl describe pod web-o
