@@ -1,0 +1,31 @@
+####in the master machine first we will create a directory which will be used as an storage for your statefulset
+  sudo -i
+  mkdir /pvder
+  ####once you create the directory we will create Persistent Volume 
+  vi pv-state.yml
+  ####inside that put this file
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: state-pv-volume
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /pvder
+  ##by default it will look for the storage in the worker node i want to see the storage in the master node only
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In 
+              values:
+              - ip-172-31-85-2 ###change the host name of your master node
+      ###to get the hostname 
+                kubectl get nodes
