@@ -29,3 +29,7 @@ spec:
               - ip-172-31-85-2 ###change the host name of your master node
       ###to get the hostname 
                 kubectl get nodes
+###verify the pv has been created or not
+ 969  kubectl get pv
+  970  kubectl describe pv state-pv-volume
+
