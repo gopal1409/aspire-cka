@@ -123,3 +123,11 @@ kubectl apply -f statefullapp.yml
  1036  kubectl get statefulset
  1037  kubectl get pod
 kubectl describe pod web-o
+####lets test the headless service
+ 1032  kubectl apply -f https://k8s.io/examples/admin/dns/busybox.yaml
+1035  kubectl exec -it busybox -- /bin/sh
+ping web-0.nginx
+###press ctrl c to exit
+ping web-1.nginx
+#####
+exit
