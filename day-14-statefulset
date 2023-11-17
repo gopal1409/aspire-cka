@@ -131,3 +131,9 @@ ping web-0.nginx
 ping web-1.nginx
 #####
 exit
+###we can delete some pod and see how the new pods are creating
+kubectl delete pod -l app=nginx
+kubectl get pod -w -l app-nginx
+###verify the pod creationg on scaling
+kubectl scale statefulset --replicase=5 web
+kubectl get pod -w -l app-nginx
