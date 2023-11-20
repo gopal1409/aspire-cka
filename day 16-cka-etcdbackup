@@ -60,11 +60,38 @@ spec:
     1064  kubectl get nodes
  1065  cd /etc/kubernetes/manifests/
  1066  ls
+##it has stopped all the control plane services. 
  1067  mv * ..
  1068  kubectl get nodes
  1069  cd ..
  1070  ls
  1071  cd manifests/
  1072  kubectl get pod
+##3next we restore the etcd. while restroing they will say that restore in a particular directory /var/lib/etcd-backup
+mkdir /var/lib/etcd-backup
+###we will restore the snapshot on the particular directory /var/lib/etcd-backup
+ ETCDCTL_API=3 etcdctl snapshot restore /tmp/etcd-backup.db --data-dir /var/lib/etcd-backup --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key
+####after restoring we will modify the etcd.yml file to look for backup in the new file path whcih comes from data dir
+vi etcd.yaml
+####inside etcd.yml file change the path to a new directory
+ hostNetwork: true
+  priority: 2000001000
+  priorityClassName: system-node-critical
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes/pki/etcd
+      type: DirectoryOrCreate
+    name: etcd-certs
+  - hostPath:
+      path: /var/lib/etcd-backup  ###modify the older path with the new one
+      type: DirectoryOrCreate
+    name: etcd-data
+######finally we will move all the control plane manifest in the the manifest directory. one moved wait for a min to make the control plane up 
+cd manifest
+mv ../*.yaml .
+
 
 
