@@ -92,7 +92,7 @@ vi etcd.yaml
       type: DirectoryOrCreate
     name: etcd-data
 ######finally we will move all the control plane manifest in the the manifest directory. one moved wait for a min to make the control plane up 
-cd manifest
+cd manifests
 mv ../*.yaml .
 
 
