@@ -14,4 +14,24 @@ name: kucc1
 app container: 2
 container name/images
 1. nginx
-2. consul
+2. httpd
+ 1109  kubectl run kucc1 --image=nginx --dry-run=client -o yaml > aa.yml
+ 1110  vi aa.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kucc1
+  name: kucc1
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  - image: httpd
+    name: httpd
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
