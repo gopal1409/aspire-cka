@@ -6,6 +6,7 @@ Open kubernetes.io
   --cert
   --key
   ####how to find out the path. 
+vi /etc/kubernetes/manifest/etcd.yaml
   apiVersion: v1
 kind: Pod
 metadata:
