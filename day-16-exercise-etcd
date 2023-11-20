@@ -34,4 +34,8 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
-
+####scale the deployment webserver to 3 pods
+ 1125  kubectl create deployment web --image=nginx
+ 1126  kubectl get deploy
+####3kubectl get deploy will show you once web server is already running
+kubectl scale deploy web --replicas=3
