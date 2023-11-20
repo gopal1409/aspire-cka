@@ -8,3 +8,10 @@ take the back of etcd in /etc/data/etcd-snapshot.db
 ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/opt/kuin00601/ca.crt --cert=/opt/kuin00601/etcd-client.crt --key=/opt/kuin00601/etcd-client.key  snapshot save /etc/data/etcd-snapshot.db
 
 ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/opt/kuin00601/ca.crt --cert=/opt/kuin00601/etcd-client.crt --key=/opt/kuin00601/etcd-client.key  snapshot restore /var/lib/backup/etcd-snapshot-previous.db
+
+###schedule a pod as follows 
+name: kucc1
+app container: 2
+container name/images
+1. nginx
+2. consul
