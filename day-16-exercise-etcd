@@ -1,0 +1,6 @@
+take the back of etcd in /etc/data/etcd-snapshot.db
+  1. CA Certificate: /opt/kuin00601/ca.crt
+  2. client certificate: /opt/kuin00601/etcd-client.crt
+  3. client key: /opt/kuin00601/etcd-client.key
+######write downt the script to take the backup
+    then restore the backup from a previous snapshot located as /var/lib/backup/etcd-snapshot-previous.db
