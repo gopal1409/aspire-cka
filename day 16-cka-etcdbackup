@@ -1,0 +1,69 @@
+Open kubernetes.io
+  click on document
+  search for etdctl 
+  --endpoints
+  --cacert
+  --cert
+  --key
+  ####how to find out the path. 
+  apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubeadm.kubernetes.io/etcd.advertise-client-urls: https://172.31.85.2:2379
+  creationTimestamp: null
+  labels:
+    component: etcd
+    tier: control-plane
+  name: etcd
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - etcd
+    - --advertise-client-urls=https://172.31.85.2:2379
+    - --cert-file=/etc/kubernetes/pki/etcd/server.crt ##use this
+    - --client-cert-auth=true
+    - --data-dir=/var/lib/etcd
+    - --experimental-initial-corrupt-check=true
+    - --experimental-watch-progress-notify-interval=5s
+    - --initial-advertise-peer-urls=https://172.31.85.2:2380
+    - --initial-cluster=ip-172-31-85-2=https://172.31.85.2:2380
+    - --key-file=/etc/kubernetes/pki/etcd/server.key #use this
+    - --listen-client-urls=https://127.0.0.1:2379,https://172.31.85.2:2379 #use this
+    - --listen-metrics-urls=http://127.0.0.1:2381
+    - --listen-peer-urls=https://172.31.85.2:2380
+    - --name=ip-172-31-85-2
+    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+    - --peer-client-cert-auth=true
+    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
+    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt #use this
+    - --snapshot-count=10000
+    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    image: registry.k8s.io/etcd:3.5.9-0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 127.0.0.1
+        path: /health?exclude=NOSPACE&serializable=true
+        port: 2381
+        scheme: HTTP
+      initialDelaySeconds: 10
+
+        ####to take the backup
+         1059  ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key  snapshot save /tmp/etcd-backup.db
+ 1060  kubectl run test --image=nginx
+ 1061  kubectl get pod
+   ####this is not required to do it in examination we are just replication the failure situation. 
+    1064  kubectl get nodes
+ 1065  cd /etc/kubernetes/manifests/
+ 1066  ls
+ 1067  mv * ..
+ 1068  kubectl get nodes
+ 1069  cd ..
+ 1070  ls
+ 1071  cd manifests/
+ 1072  kubectl get pod
+
+
