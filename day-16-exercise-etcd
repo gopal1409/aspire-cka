@@ -5,6 +5,6 @@ take the back of etcd in /etc/data/etcd-snapshot.db
 ######write downt the script to take the backup
     then restore the backup from a previous snapshot located as /var/lib/backup/etcd-snapshot-previous.db
 ####solution
-TCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/opt/kuin00601/ca.crt --cert=/opt/kuin00601/etcd-client.crt --key=/opt/kuin00601/etcd-client.key  snapshot save /etc/data/etcd-snapshot.db
+ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/opt/kuin00601/ca.crt --cert=/opt/kuin00601/etcd-client.crt --key=/opt/kuin00601/etcd-client.key  snapshot save /etc/data/etcd-snapshot.db
 
 ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/opt/kuin00601/ca.crt --cert=/opt/kuin00601/etcd-client.crt --key=/opt/kuin00601/etcd-client.key  snapshot restore /var/lib/backup/etcd-snapshot-previous.db
