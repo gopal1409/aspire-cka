@@ -57,8 +57,9 @@ upgrade the kubeadm kubectl kubelet
     1172  apt-cache madison kubectl
  1173  apt-get install kubeadm=1.28.2-00 kubelet=1.28.2-00 kubectl=1.28.2-00
   ##############
-   1175  kubeadm upgrade plan
-   1176  kubeadm upgrade apply v1.28.4
+  sudo kubeadm upgrade node
+###this need to be updated in master machine
+sudo kubeadm upgrade apply
 #####once upgraded
 exit
 exit
