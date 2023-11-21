@@ -10,6 +10,7 @@
 sudo -i
   ###stop the kubelet service
   systemctl stop kubelet
+systemctl status kubelet
   exit
   exit
   ####in the master node wait for couple of min
@@ -19,3 +20,8 @@ sudo -i
   sudo systemctl start kubelet
   @@@toi make it permanent
   sudo systemctl enable kubelet
+sudo systemctl status kubelet
+exit
+exit
+###from the master machine it will show worker node is ready
+kubectl get nodes
