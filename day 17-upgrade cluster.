@@ -1,0 +1,40 @@
+###ssh eks8
+####you need to run some command. 
+  first update your system 
+  update the cachec also
+  ##################
+  before you upgrade run the upgrade plan
+  1148  kubeadm upgrade plan
+####to check all the version of kubeadm and choose the latest version and update it
+   1150  apt-cache madison kubeadm
+ 1151  apt-get install -y kubeadm=1.28.2-00
+########## verify the same using 
+  kubeadm version
+  ##################################
+  we need to drain the master node and evict all the master node running pod
+  1158  kubectl get nodes
+ 1159  kubectl drain ip-172-31-85-2 --ignore-daemonsets
+#####once i drain it we can use the 
+  kubectl get nodes
+  which will show me the node scheduling is disabled
+  #############
+  upgrade the kubeadm kubectl kubelet
+  ##############################
+  1172  apt-cache madison kubelet
+    1172  apt-cache madison kubeadm
+    1172  apt-cache madison kubectl
+ 1173  apt-get install kubeadm=1.28.2-00 kubelet=1.28.2-00 kubectl=1.28.2-00
+  ##############
+   1175  kubeadm upgrade plan
+   1176  kubeadm upgrade apply v1.28.4
+  ###finally uncordon the master node
+   1180  kubectl get nodes
+ 1181  kubectl uncordon ip-172-31-85-2
+  kubectl get nodes
+  ###this will show you the scheduling is enabled
+ 1182  systemctl daemon-reload
+ 1183  systemctl restart kubelet
+
+
+
+  
