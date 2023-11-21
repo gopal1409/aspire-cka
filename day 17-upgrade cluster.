@@ -38,5 +38,32 @@ kubectl drain ip-172-31-85-2 --ignore-daemonsets --delete-emptydir-data --force
  1183  systemctl restart kubelet
 
 
+#####how to upgrade the worker node. 
+##first we need to drain the worker node
+  kubectl get nodes
+###after kubectl drain workernodename 
+kubectl drain ip-172-31-85-2 --ignore-daemonsets --delete-emptydir-data --force
+kubectl get nodes
+####the above command will show scheduling is disabled 
+###now we need to login to the worker node
+ssh lab-user@lab-as-1326.lc.cl-labs.springpeople.com
+sudo -i
+######then upgrade the worker node
+upgrade the kubeadm kubectl kubelet
+  ##############################
+  1172  apt-cache madison kubelet
+    1172  apt-cache madison kubeadm
+    1172  apt-cache madison kubectl
+ 1173  apt-get install kubeadm=1.28.2-00 kubelet=1.28.2-00 kubectl=1.28.2-00
+  ##############
+   1175  kubeadm upgrade plan
+   1176  kubeadm upgrade apply v1.28.4
+#####once upgraded
+exit
+exit
+###go back to master machine
+kubectl get nodes
+#####the above command will verify that you are back to master machine
+###3finally uncordon the worker node
+ kubectl uncordon ip-172-31-85-54
 
-  
