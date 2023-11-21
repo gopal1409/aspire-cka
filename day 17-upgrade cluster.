@@ -27,8 +27,9 @@ kubectl drain ip-172-31-85-2 --ignore-daemonsets --delete-emptydir-data --force
     1172  apt-cache madison kubectl
  1173  apt-get install kubeadm=1.28.2-00 kubelet=1.28.2-00 kubectl=1.28.2-00
   ##############
-   1175  kubeadm upgrade plan
-   1176  kubeadm upgrade apply v1.28.4
+  sudo kubeadm upgrade node
+sudo kubeadm upgrade apply
+   
   ###finally uncordon the master node
    1180  kubectl get nodes
  1181  kubectl uncordon ip-172-31-85-2
