@@ -15,7 +15,7 @@
   1158  kubectl get nodes
  1159  kubectl drain ip-172-31-85-2 --ignore-daemonsets
 ###if you get the storage errror cannot delete the local storage
-kubectl drain ip-172-31-85-2 --ignore-daemonsets --delete-emptydir-data
+kubectl drain ip-172-31-85-2 --ignore-daemonsets --delete-emptydir-data --force
 #####once i drain it we can use the 
   kubectl get nodes
   which will show me the node scheduling is disabled
