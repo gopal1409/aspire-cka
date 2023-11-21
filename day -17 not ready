@@ -1,0 +1,21 @@
+13%
+  task 
+  a worker node name xyz is in state not ready. investigate why this is the case and perform any appropriate steps to bring the node
+  to a ready state you need to also ensure that any changes are made permanent. 
+  ####login to the worker node
+  how to replicate the state
+  kubectl get nodes
+  login to the worke node
+  1212  ssh lab-user@lab-as-1326.lc.cl-labs.springpeople.com
+sudo -i
+  ###stop the kubelet service
+  systemctl stop kubelet
+  exit
+  exit
+  ####in the master node wait for couple of min
+  kubectl get nodes
+  #####it will show me worker node not ready
+  #####in the exam just need to login to xyz node
+  sudo systemctl start kubelet
+  @@@toi make it permanent
+  sudo systemctl enable kubelet
