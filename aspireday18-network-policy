@@ -57,6 +57,34 @@ spec:
 ####get the backend ip address and check the same both the way it is not working
  1411  kubectl get pod -o wide
  1412  kubectl exec frontend -- curl 192.168.1.25
+###finally we need to create an backend ingress rule from frontend
+vi backend.yml
+###################
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: backend
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              run: frontend
+###### lets verify the same
+kubectl apply -f backend.yml
+####now we need to check the frontend can intiate connectio to backend
+ 1421  kubectl get pod -o wide
+1422  kubectl exec frontend -- curl backend ###this will not work
+ 1422  kubectl exec frontend -- curl 192.168.1.25
+######backend cannot intiate connection to frontend as there is no rule exist
 
+1422  kubectl exec backend -- curl 192.168.1.24
+###ip why we are using ip name resolution is not working. 
 
 
