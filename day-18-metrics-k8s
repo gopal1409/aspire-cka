@@ -27,5 +27,6 @@ and put --kubelet-insecure-tls
  1321  kubectl top pod -A
  1322  kubectl top -h
 ####if you want to check the container wise utilization report
+from the pod label name=cpu-utlizer, find pods running high cpu workload and write the name of the pod consuming most cpu to the file /opt/KUTR00401/kutr00401.sh(which already exists)
  1323  kubectl top pod --containers=true
 
