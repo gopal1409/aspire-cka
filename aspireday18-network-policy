@@ -11,3 +11,23 @@ when we talk about network policy who provide network in k8s. the service
 ###lets verify they are talking to each other or not
  1389  kubectl exec frontend -- curl backend
  1390  kubectl exec backend -- curl frontend
+####lets create a default deny policy
+vi deny.yml
+#####add the deny policy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+#####apply it
+kubectl apply -f deny.yml
+###lets verify the policy
+ 1397  kubectl get networkpolicy
+ 1398  kubectl exec frontend -- curl backend
+ 1399  kubectl exec backend -- curl frontend
+
