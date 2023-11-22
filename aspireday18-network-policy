@@ -30,4 +30,33 @@ kubectl apply -f deny.yml
  1397  kubectl get networkpolicy
  1398  kubectl exec frontend -- curl backend
  1399  kubectl exec backend -- curl frontend
+####lets create teh egress rule from frontend to backend
+vi front.yml
+######
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: frontend-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: frontend
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              run: backend
+####apply it and verify it
+ kubectl apply -f front.yml
+ kubectl get networkpolicy
+####using curl command lets check the outgoing traffic is working or not
+ 1410  kubectl exec frontend -- curl backend
+####get the backend ip address and check the same both the way it is not working
+ 1411  kubectl get pod -o wide
+ 1412  kubectl exec frontend -- curl 192.168.1.25
+
+
 
