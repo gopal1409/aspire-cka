@@ -20,3 +20,12 @@ and put --kubelet-insecure-tls
         - --metric-resolution=15s
 
 ######kubectl get pod
+ 1317  kubectl get pod -A
+ 1318  kubectl top
+ 1319  kubectl top node
+ 1320  kubectl top pod
+ 1321  kubectl top pod -A
+ 1322  kubectl top -h
+####if you want to check the container wise utilization report
+ 1323  kubectl top pod --containers=true
+
