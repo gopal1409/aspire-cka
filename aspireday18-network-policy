@@ -1,0 +1,13 @@
+Withough network polucy by default every pod can access every pod. so pod are not isolated from each other
+when we talk about network policy who provide network in k8s. the service
+###lets create two pod frontend and backend
+ 1381  kubectl run frontend --image=nginx
+ 1382  kubectl run backend --image=nginx
+ 1383  kubectl get pod
+####lets creat the service for frontend and backend
+1386  kubectl expose pod frontend --port 80
+ 1387  kubectl expose pod backend --port 80
+ 1388  kubectl get svc
+###lets verify they are talking to each other or not
+ 1389  kubectl exec frontend -- curl backend
+ 1390  kubectl exec backend -- curl frontend
