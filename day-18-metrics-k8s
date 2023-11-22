@@ -2,3 +2,21 @@
   kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 kubectl get pod -A
   ###check that metrics server show 0/1
+##3how to resolve the issue
+
+ 1311  kubectl get pod -A
+ 1312  kubectl get deploy -A
+ 1313  kubectl edit deploy metrics-server --namespace=kube-system
+####press esc i
+and put --kubelet-insecure-tls
+###this will resolve the issue and matrics server will be 1/1
+ containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=4443
+        - --kubelet-insecure-tls
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+
+######kubectl get pod
