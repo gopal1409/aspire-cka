@@ -30,7 +30,7 @@ and put --kubelet-insecure-tls
  1323  kubectl top pod --containers=true
 ##exam question
 from the pod label name=cpu-utlizer, find pods running high cpu workload and write the name of the pod consuming most cpu to the file /opt/KUTR00401/kutr00401.sh(which already exists)
-/opt/KUTR00401
+mkdir /opt/KUTR00401
 touch /opt/KUTR00401/kutr00401.sh
  1353  kubectl run web --image=nginx
  1354  kubectl describe pod web
