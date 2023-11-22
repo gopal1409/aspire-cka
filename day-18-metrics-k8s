@@ -1,0 +1,4 @@
+###lets install metrics server in k8s
+  kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl get pod -A
+  ###check that metrics server show 0/1
