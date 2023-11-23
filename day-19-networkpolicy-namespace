@@ -8,6 +8,9 @@ kubectl create ns cassandra
 # and an empty file will abort the edit. If an error occurs while saving this file will be
 # reopened with the relevant failures.
 #
+###open the default manifest file
+kubectl edit ns default
+############################
 apiVersion: v1
 kind: Namespace
 metadata:
