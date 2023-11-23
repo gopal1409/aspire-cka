@@ -2,6 +2,7 @@
   1. pod to pod : network policy in the same namespace communication. with default port 53 open. 
   2. pod to pod(different namespace)
 #####before you create network for namespace check that all this namespace has a label
+kubectl create ns cassandra
  kubectl edit ns cassandra
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
