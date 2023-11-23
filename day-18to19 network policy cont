@@ -1,0 +1,3 @@
+####problem we have is that we cannot curl the other pod using naming convention
+   kubectl exec backend -- curl frontend
+####how to resolve the naming convention error
