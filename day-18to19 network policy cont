@@ -23,3 +23,49 @@ spec:
 ######apply the deny rule
 kubectl apply -f deny.yml
  kubectl exec frontend -- curl backend
+####backend to frontend communication
+vi b1-ingress.yml
+######################
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-ingress-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: frontend
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              run: backend
+#####apply the policy
+kubectl apply -f b1-ingress.yml
+######egress routing for back from
+vi b1-egress.yml
+#################################
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-egress-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: backend
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              run: frontend
+#####apply the policy
+kubectl apply -f b1-egress.yml
+###verify the backend to frontend communciation
+kubectl get networkpolicy
+ kubectl exec backend -- curl frontend
+
