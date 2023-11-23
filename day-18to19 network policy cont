@@ -2,3 +2,23 @@
    kubectl exec backend -- curl frontend
  kubectl exec frontend -- curl backend
 ####how to resolve the naming convention error
+vi deny.yml
+###we will all port 53 or enable dns service in my deny rule as an exception
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+  - ports:
+      - port: 53
+        protocol: TCP
+      - port: 53
+        protocol: UDP
+######apply the deny rule
+kubectl apply -f deny.yml
