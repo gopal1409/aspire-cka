@@ -1,4 +1,82 @@
 ###network policy are three type but they work in namespace only
-  1. pod to pod : we have seen
+  1. pod to pod : network policy in the same namespace communication. with default port 53 open. 
   2. pod to pod(different namespace)
+#####before you create network for namespace check that all this namespace has a label
+ kubectl edit ns cassandra
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: "2023-11-23T09:21:49Z"
+  labels:
+    kubernetes.io/metadata.name: default
+  name: cassandra
+  resourceVersion: "43"
+  uid: 9940aceb-4685-40b7-9aae-131771c1b372
+  lables:  ###add the lables
+    ns: cassandra ####add the labels
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active
+
+##3add the labels in default ns also
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: "2023-11-23T09:21:49Z"
+  labels:
+    kubernetes.io/metadata.name: default
+  name: default
+  resourceVersion: "43"
+  uid: 9940aceb-4685-40b7-9aae-131771c1b372
+  labels: ###add the labels
+    ns: default
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active
+
+#########lets create an namspace policy
+ 76  kubectl -n cassandra run cassandra --image=nginx
+   77  kubectl get pod -A
+   78  kubectl -n cassandra get pod -o wide
+   79  kubectl exec backend -- curl 192.168.1.4
+#######now we will create the policy to do the communication
+ 82  vi cassandra.yml
+######policy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: casandra-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: backend
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+  - from:
+        - podSelector:
+            matchLabels:
+              run: frontend
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          ns: cassandra
+######save it and apply it and test it
+ 87  kubectl apply -f cassandra.yml
+   88  kubectl exec backend -- curl 192.168.1.4
   
