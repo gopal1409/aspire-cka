@@ -1,0 +1,4 @@
+###network policy are three type but they work in namespace only
+  1. pod to pod : we have seen
+  2. pod to pod(different namespace)
+  
