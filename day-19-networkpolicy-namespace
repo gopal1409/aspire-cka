@@ -17,7 +17,7 @@ metadata:
   name: cassandra
   resourceVersion: "43"
   uid: 9940aceb-4685-40b7-9aae-131771c1b372
-  lables:  ###add the lables
+  labels:  ###add the lables
     ns: cassandra ####add the labels
 spec:
   finalizers:
