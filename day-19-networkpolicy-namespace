@@ -55,6 +55,7 @@ status:
  76  kubectl -n cassandra run cassandra --image=nginx
    77  kubectl get pod -A
    78  kubectl -n cassandra get pod -o wide
+###get the ip address of cassandra pod
    79  kubectl exec backend -- curl 192.168.1.4
 #######now we will create the policy to do the communication
  82  vi cassandra.yml
