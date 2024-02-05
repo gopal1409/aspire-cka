@@ -1,0 +1,2 @@
+how to check the master node
+kubectl get nodes
