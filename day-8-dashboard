@@ -11,7 +11,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/a
   ##it will open the file in vi editor
   ##press Esc i
   #from the last go to third line change the ClusterIP to NodePort
-  ###after that save the file
+  ###after that save the file press esc :wq
   ##open the browser copy the second machine url and the port number put httpd in front of it. 
   293  kubectl get svc -A
   294  kubectl -n kubernetes-dashboard create token admin-user
